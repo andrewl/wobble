@@ -23,23 +23,24 @@ All text above, and the splash screen must be included in any redistribution
 
 
 // If using software SPI (the default case):
-#define OLED_MOSI   9
-#define OLED_CLK   10
-#define OLED_DC    11
-#define OLED_CS    12
-#define OLED_RESET 13
+//#define OLED_MOSI   9
+//#define OLED_CLK   10
+//#define OLED_DC    11
+//#define OLED_CS    12
+//#define OLED_RESET 13
 
-//#define OLED_MOSI   D7 //Connect to D1 on OLED
-//#define OLED_CLK    D5 //Connect to D0 on OLED 
-//#define OLED_DC     D1 //Connect to DC on OLED
-//#define OLED_CS     D8 //Connect to CS on OLED
-//#define OLED_RESET  D3 //Connect to RES on OLED
+#define OLED_MOSI   D7 //Connect to D1 on OLED
+#define OLED_CLK    D5 //Connect to D0 on OLED 
+#define OLED_DC     D1 //Connect to DC on OLED
+#define OLED_CS     D8 //Connect to CS on OLED
+#define OLED_RESET  D3 //Connect to RES on OLED
 
 Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
 int pos_x = random(0,128);
 int pos_y = random(0,64);
 int delay_time = 200;
+int vector[2] = {1, 1};
 
 
 void setup()   {      
@@ -48,19 +49,22 @@ void setup()   {
   // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
   display.begin(SSD1306_SWITCHCAPVCC);
   // init done
-  
+  vector[0] = random(-1,2);
+  vector[1] = random(-1,2);
 }
 
 void loop() {
   draw_ball(pos_x, pos_y);
   delay(delay_time);
-  pos_x += 1;
-  pos_y += 1;
+  pos_x += vector[0];
+  pos_y += vector[1];
   delay_time -= 1;
 
   if (pos_x > 128 || pos_y > 64) {
      pos_x = random(0,128);
      pos_y = random(0,64);
+     vector[0] = random(-1,2);
+     vector[1] = random(-1,2);
   }
 
   if (delay_time < 0) {
