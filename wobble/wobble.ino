@@ -35,6 +35,8 @@ All text above, and the splash screen must be included in any redistribution
 #define OLED_CS     D8 //Connect to CS on OLED
 #define OLED_RESET  D3 //Connect to RES on OLED
 
+const int BALL_RADIUS = 5;
+
 Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
 int pos_x = random(0,128);
@@ -60,10 +62,10 @@ void loop() {
   pos_y += vector[1];
   delay_time -= 1;
 
-  if (pos_x > 128 || pos_x < 0) {
+  if (pos_x > 128-BALL_RADIUS || pos_x < 0+BALL_RADIUS) {
      vector[0] = -vector[0];
   }
-  if (pos_y > 64 || pos_y < 0) {
+  if (pos_y > 64-BALL_RADIUS || pos_y < 0+BALL_RADIUS) {
      vector[1] = -vector[1];
   }
 
@@ -81,7 +83,7 @@ void draw_ball(int x, int y) {
 
 
   // draw a white circle, 5 pixel radius
-  display.fillCircle(x, y, 5, WHITE);
+  display.fillCircle(x, y, BALL_RADIUS, WHITE);
   display.display();
    
 
