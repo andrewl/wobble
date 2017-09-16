@@ -39,8 +39,8 @@ const int BALL_RADIUS = 5;
 
 Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
-int pos_x = random(0,128);
-int pos_y = random(0,64);
+int pos_x = random(1+BALL_RADIUS,128-BALL_RADIUS);
+int pos_y = random(1+BALL_RADIUS,64-BALL_RADIUS);
 int delay_time = 200;
 int vector[2] = {1, 1};
 
