@@ -70,7 +70,7 @@ void loop() {
   }
 
   if (delay_time < 0) {
-    delay_time = 200;
+    delay_time = 0;
   }
 
    
