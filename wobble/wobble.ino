@@ -60,11 +60,11 @@ void loop() {
   pos_y += vector[1];
   delay_time -= 1;
 
-  if (pos_x > 128 || pos_y > 64) {
-     pos_x = random(0,128);
-     pos_y = random(0,64);
-     vector[0] = random(-1,2);
-     vector[1] = random(-1,2);
+  if (pos_x > 128 || pos_x < 0) {
+     vector[0] = -vector[0];
+  }
+  if (pos_y > 64 || pos_y < 0) {
+     vector[1] = -vector[1];
   }
 
   if (delay_time < 0) {
